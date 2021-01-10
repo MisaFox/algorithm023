@@ -1,0 +1,53 @@
+方法一
+import collections
+class Solution:
+    def compareSr(self, s: str, t: str) -> bool:
+        return collections.Counter(s) == collections.Counter(t)
+
+方法二
+class Solution():
+    def compareSr(self,s,t):
+        if len(s) != len(t): # 若两个字符串长度不等，则直接返回false.
+            return False
+        slist = list(s)      # 转成list
+        tlist = list(t)
+        slist.sort()         # 排序
+        tlist.sort()
+        for sString,tString in zip(slist,tlist):
+            if sString == tString:
+                continue
+            else:
+                return False
+        return True
+if __name__ == '__main__':
+    s = 'anagram'
+    t = 'nagaram'
+    solu = Solution()
+    res = solu.compareSr(s,t)
+    print('结果为\n',res)
+
+方法三
+class Solution():
+    def compareSr(self,s,t):
+        # 将 字符串s 建立哈希表
+        sString = list(s)
+        scount = [0] * len(sString)
+        sdict = dict(zip(sString,scount))
+        for ele in s:
+            sdict[ele] += 1
+        # 将 字符串t 建立哈希表
+        tString = list(t)
+        tcount = [0] * len(tString)
+        tdict = dict(zip(tString,tcount))
+        for ele in t:
+            tdict[ele] += 1
+        # 比较两个哈细胞是否相等
+        if sdict == tdict:
+            return True
+        return False
+if __name__ == '__main__':
+    s = 'anagram'
+    t = 'nagaram'
+    solu = Solution()
+    res = solu.compareSr(s,t)
+    print('结果为\n',res)
