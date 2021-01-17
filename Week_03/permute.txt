@@ -1,0 +1,33 @@
+参考一
+class Solution(object):
+    def permute(self, nums):
+        if not nums:
+            return []
+          
+        res = []
+        def dfs(queue,arr):
+            if not queue:
+                res.append(list(arr))
+                return  
+            size = len(queue)
+            # 从队列中取出第一个元素，放入列表(栈)中，并继续下一层递
+            # 等下一层递归返回后，将列表(栈)中的元素弹出，放回到队列中
+            for _ in xrange(size):
+                arr.append(queue.pop(0))
+                dfs(queue,arr)
+                queue.append(arr.pop())
+        dfs(nums,[])
+        return res
+
+参考二
+def permute(self, nums: List[int]) -> List[List[int]]:
+        res, length = [], len(nums)
+        def helper(index):
+            if index == length:
+                res.append(list(nums))
+            for i in range(index, length):
+                nums[index], nums[i] = nums[i], nums[index]
+                helper(index+1)
+                nums[index], nums[i] = nums[i], nums[index]
+        helper(0)
+        return res
