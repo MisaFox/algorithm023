@@ -1,0 +1,22 @@
+class Solution:
+    def lemonSolution(self, bills: List[int]) -> bool:
+        valueFive = 0
+	valueTen = 0
+        for i in range(len(bills)):
+            if bills[i] == 5:
+                valueFive += 1
+            elif bills[i] == 10:
+                if valueFive > 0:
+                    valueFive -= 1
+                    valueTen +=1
+                else:
+                    return False 
+            else:
+                if valueFive >=1 and valueTen >= 1:
+                    valueFive -= 1
+                    valueTen -=1
+                elif valueFive >=3:
+                    valueFive = valueFive - 3
+                else:
+                    return False
+        return True
